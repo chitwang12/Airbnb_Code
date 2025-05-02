@@ -26,3 +26,48 @@ export async function getHotelById(id: number){
     
     return hotel;
 }
+
+export async function getAllHotels(){
+    const hotels = await Hotel.findAll();
+
+    if(!hotels){
+        logger.error(`No hotels found`);
+        throw new NotFoundError(`No hotels found`);
+    }
+
+    logger.info(`Hotels found ::: ${hotels.length}`);
+    return hotels;
+}
+
+
+export async function updateHotelsById(id:number, hotelData: createHotelDto){
+    const hotel = await Hotel.findByPk(id);
+    if(!hotel){
+        logger.error(`Hotel not found with id: ${id}`);
+        throw new NotFoundError(`Hotel with id: ${id} not Found`);
+    }
+
+    hotel.name = hotelData.name;
+    hotel.address = hotelData.address;
+    hotel.location = hotelData.location;
+    hotel.rating = hotelData.rating;
+    hotel.rating_count = hotelData.ratingCount;
+
+    await hotel.save();
+
+    logger.info(`Hotel updated: ${hotel.id}`);
+    return hotel;
+}
+
+
+export async function deleteHotelById(id: number){
+    const hotel = await Hotel.findByPk(id);
+    if(!hotel){
+        logger.error(`Hotel not found with id: ${id}`);
+        throw new NotFoundError(`Hotel with id: ${id} not Found`);
+    }
+
+    await hotel.destroy();
+    logger.info(`Hotel deleted: ${hotel.id}`);  
+
+}
