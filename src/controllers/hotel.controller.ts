@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
-import { deleteHotelById, updateHotelsById } from '../repositories/hotel.repository';
+import { updateHotelsById } from '../repositories/hotel.repository';
 import { StatusCodes } from 'http-status-codes';
-import { createHotelService, getAllHotelsService, getHotelByIdService } from '../services/hotel.service';
+import { createHotelService, deleteHotelService, getAllHotelsService, getHotelByIdService } from '../services/hotel.service';
 
 export async function createHotelHandler(req:Request, res:Response, next:NextFunction) {
     
@@ -53,8 +53,8 @@ export async function updateHotelHandler(req:Request, res:Response, next:NextFun
 }
 
 export async function deleteHotelHandler(req:Request, res:Response, next:NextFunction) {
-    const hotelResponse = await deleteHotelById(Number(req.params.id));
-    res.status(200).json({
+    const hotelResponse = await deleteHotelService(Number(req.params.id));
+    res.status(StatusCodes.OK).json({
         status: 'success',
         message: 'Hotel deleted successfully',
         data: {
