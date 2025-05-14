@@ -2,7 +2,7 @@ import express from "express";
 import { serverConfig } from "./config";
 import v1Router from "./routers/v1/index.router";
 import v2Router from "./routers/v2/index.router";
-import { genericErrorHandler } from "./middlewares/error.middleware";
+import { appErrorHandler, genericErrorHandler } from "./middlewares/error.middleware";
 import logger from "./config/logger.config";
 import { attachCorrelationIdMiddleware } from "./middlewares/correlation.middleware";
 import sequelize from "./db/models/sequelize";
@@ -21,6 +21,7 @@ app.use("/api/v2", v2Router);
 /**
  * Add the error handler middleware
  */
+app.use(appErrorHandler)
 app.use(genericErrorHandler);
 
 app.listen(serverConfig.PORT, async () => {

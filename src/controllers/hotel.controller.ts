@@ -1,9 +1,13 @@
 import { Request, Response, NextFunction } from 'express';
-import { createHotel, deleteHotelById, getAllHotels, getHotelById, updateHotelsById } from '../repositories/hotel.repository';
+import { deleteHotelById, updateHotelsById } from '../repositories/hotel.repository';
+import { StatusCodes } from 'http-status-codes';
+import { createHotelService, getAllHotelsService, getHotelByIdService } from '../services/hotel.service';
 
 export async function createHotelHandler(req:Request, res:Response, next:NextFunction) {
-    const hotelResponse = await createHotel(req.body);
-    res.status(201).json({
+    
+    const hotelResponse = await createHotelService(req.body);
+    
+    res.status(StatusCodes.CREATED).json({
         status: 'success',
         message: 'Hotel created successfully',
         data: {
@@ -14,8 +18,8 @@ export async function createHotelHandler(req:Request, res:Response, next:NextFun
 
 
 export async function getHotelByIDHandler(req:Request, res:Response, next:NextFunction) {
-    const hotelResponse = await getHotelById(Number(req.params.id));
-    res.status(200).json({
+    const hotelResponse = await getHotelByIdService(Number(req.params.id));
+    res.status(StatusCodes.OK).json({
         status: 'success',
         message: 'Hotel retrieved successfully',
         data: {
@@ -25,8 +29,9 @@ export async function getHotelByIDHandler(req:Request, res:Response, next:NextFu
 }
 
 export async function getAllHotelsHandler(req:Request, res:Response, next:NextFunction) {
-    const hotelResponse = await getAllHotels();
-    res.status(200).json({
+    console.log("::: inside Controller");
+    const hotelResponse = await getAllHotelsService();
+    res.status(StatusCodes.OK).json({
         status: 'success',
         message: 'Hotels retrieved successfully',
         data: {

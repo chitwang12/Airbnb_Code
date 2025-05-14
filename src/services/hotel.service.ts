@@ -1,5 +1,5 @@
 import { createHotelDto } from "../dto/hotel.dto";
-import { createHotel, getHotelById } from "../repositories/hotel.repository";
+import { createHotel, getHotelById,getAllHotels } from "../repositories/hotel.repository";
 import { BadRequestError } from "../utils/errors/app.error";
 
 const blockListedAddresses = [
@@ -25,4 +25,9 @@ export async function getHotelByIdService(id: number) {
     const hotel = await getHotelById(id);
 
     return hotel;
+}
+
+export async function getAllHotelsService() {
+    const hotels = await getAllHotels();
+    return hotels;
 }
