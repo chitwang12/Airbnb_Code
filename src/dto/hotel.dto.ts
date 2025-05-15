@@ -4,4 +4,5 @@ export type createHotelDto = {
     location: string;
     rating?: number;
     ratingCount?: number;
+    deleted_at?: Date | null;
 }

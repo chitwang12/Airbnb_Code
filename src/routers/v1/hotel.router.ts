@@ -1,5 +1,5 @@
 import express from 'express';
-import {createHotelHandler, deleteHotelHandler, getAllHotelsHandler, getHotelByIDHandler, updateHotelHandler} from '../../controllers/hotel.controller';
+import {createHotelHandler, deleteHotelHandler, getAllHotelsHandler, getHotelByIDHandler, updateHotelHandler } from '../../controllers/hotel.controller';
 import { validateRequestBody } from '../../validators';
 import { hotelSchema } from '../../validators/hotel.validator';
 
