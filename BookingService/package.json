@@ -1,10 +1,12 @@
 {
-  "name": "Booking Service",
+  "name": "@booking-service",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
     "start": "ts-node src/server.ts",
-    "dev": "nodemon src/server.ts"
+    "dev": "nodemon src/server.ts",
+    "migrate": "npx prisma migrate dev --name booking-entity --create-only && npx prisma generate",
+    "db:push": "npx prisma db push"
   },
   "keywords": [],
   "author": "",
@@ -14,7 +16,8 @@
     "@prisma/client": "^6.8.2",
     "dotenv": "^16.4.7",
     "express": "^5.1.0",
-    "prisma": "^6.8.2",
+    "ioredis": "^5.6.1",
+    "redlock": "^5.0.0-beta.2",
     "uuid": "^11.1.0",
     "winston": "^3.17.0",
     "winston-daily-rotate-file": "^5.0.0",

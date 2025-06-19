@@ -3,7 +3,6 @@ import Hotel from '../db/models/hotel';
 import logger from '../config/logger.config';
 import { NotFoundError } from '../utils/errors/app.error';
 
-
 export async function createHotel(hotelData: createHotelDto){
     const hotel = await Hotel.create({
         name: hotelData.name,
